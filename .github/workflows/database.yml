@@ -29,5 +29,6 @@ jobs:
         run: |
           psql -h ${{ secrets.AWS_RDS_HOST }} -U ${{ secrets.AWS_RDS_USER }} -d ${{ secrets.AWS_RDS_DATABASE }} -p 5432 -a -f proddbbackup06102023.sql
         env:
-          PGPASSWORD: ${{ secrets.AWS_RDS_PASSWORD }}         
+          PGPASSWORD: ${{ secrets.AWS_RDS_PASSWORD }}
+                   
 
