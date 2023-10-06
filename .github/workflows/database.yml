@@ -9,19 +9,25 @@ jobs:
   update_db:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: ${{ secrets.AWS_RDS_DATABASE }}
+          POSTGRES_USER: ${{ secrets.AWS_RDS_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.AWS_RDS_PASSWORD }}
+          POSTGRES_HOST: ${{ secrets.AWS_RDS_HOST }}
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Set up PostgreSQL Client
-        uses: s3ponia/setup-pgsql@v1
-
       - name: Execute SQL Query
         run: |
-          psql -h ${{ secrets.AWS_RDS_HOST }} \
-               -U ${{ secrets.AWS_RDS_USER }} \
-               -d ${{ secrets.AWS_RDS_DATABASE }} \
-               -p ${{ secrets.AWS_RDS_PORT }} \
-               -a -f proddbbackup06102023.sql
+          psql -h ${{ secrets.AWS_RDS_HOST }} -U ${{ secrets.AWS_RDS_USER }} -d ${{ secrets.AWS_RDS_DATABASE }} -p 5432 -a -f proddbbackup06102023.sql
         env:
           PGPASSWORD: ${{ secrets.AWS_RDS_PASSWORD }}
+
