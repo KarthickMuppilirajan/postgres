@@ -22,6 +22,6 @@ jobs:
                -U ${{ secrets.AWS_RDS_USER }} \
                -d ${{ secrets.AWS_RDS_DATABASE }} \
                -p ${{ secrets.AWS_RDS_PORT }} \
-               -a -f update.sql
+               -a -f proddbbackup06102023.sql
         env:
           PGPASSWORD: ${{ secrets.AWS_RDS_PASSWORD }}
