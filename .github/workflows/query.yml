@@ -30,6 +30,7 @@ jobs:
           script: |
             # Replace the following commands with your desired commands
             echo "Connected to EC2 instance"
+            mkdir /test
             # Run your PostgreSQL dump command here
         env:
           SSH_KEY: ${{ secrets.SSH_PEM_KEY }}
