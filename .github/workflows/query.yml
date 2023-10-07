@@ -34,6 +34,6 @@ jobs:
           script: |
             # Replace the following commands with your desired commands
             echo "Connected to EC2 instance"
-            sudo psql -h localhost -p ${{ secrets.AWS_RDS_PORT }} -U postgres -d ${{ secrets.AWS_RDS_DATABASEE }} -f /test/proddbbackup06102023.sql
+            sudo pg_restore -h localhost -p ${{ secrets.AWS_RDS_PORT }} -U postgres -d ${{ secrets.AWS_RDS_DATABASE }} -f /test/proddbbackup06102023.sql
         env:
           PGPASSWORD: ${{ secrets.AWS_RDS_PASSWORD }}
