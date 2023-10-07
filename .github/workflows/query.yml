@@ -22,7 +22,7 @@ jobs:
         #   EC2_INSTANCE_IP: ${{ secrets.EC2_INSTANCE_IP }}
 
       - name: SSH into EC2 and Execute Commands
-        uses: appleboy/ssh-action@master
+        uses: webfactory/ssh-agent@v0.5.4
         with:
           host: ${{ secrets.EC2_INSTANCE_IP }}
           username: ec2-user # Replace with your EC2 instance's username
