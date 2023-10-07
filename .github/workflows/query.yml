@@ -21,7 +21,7 @@ jobs:
 
       - name: Copy File to EC2
         run: |
-          scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no proddbbackup06102023.sql ubuntu@${{ secrets.EC2_INSTANCE_IP }}:/test/
+          sudo scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no proddbbackup06102023.sql ubuntu@${{ secrets.EC2_INSTANCE_IP }}:/test/
         # env:
         #   EC2_INSTANCE_IP: ${{ secrets.EC2_INSTANCE_IP }}
 
