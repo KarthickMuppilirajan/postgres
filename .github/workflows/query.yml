@@ -1,0 +1,36 @@
+name: SSH into EC2 and Run Commands
+
+on:
+  push:
+    branches:
+      - database-query
+
+jobs:
+  ssh_ec2:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PEM_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ec2_instance_ip >> ~/.ssh/known_hosts
+        env:
+          EC2_INSTANCE_IP: ${{ secrets.EC2_INSTANCE_IP }}
+
+      - name: SSH into EC2 and Execute Commands
+        uses: joshdmn/ssh-run-command@v1
+        with:
+          host: ${{ secrets.EC2_INSTANCE_IP }}
+          username: ec2-user # Replace with your EC2 instance's username
+          key: ${{ secrets.SSH_PEM_KEY }}
+          script: |
+            # Replace the following commands with your desired commands
+            echo "Connected to EC2 instance"
+            # Run your PostgreSQL dump command here
+        env:
+          SSH_KEY: ${{ secrets.SSH_PEM_KEY }}
