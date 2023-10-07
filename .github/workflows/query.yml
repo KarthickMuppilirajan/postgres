@@ -19,8 +19,8 @@ jobs:
           echo "${{ secrets.SSH_PEM_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ec2_instance_ip >> ~/.ssh/known_hosts
-        env:
-          EC2_INSTANCE_IP: ${{ secrets.EC2_INSTANCE_IP }}
+        # env:
+        #   EC2_INSTANCE_IP: ${{ secrets.EC2_INSTANCE_IP }}
 
       - name: SSH into EC2 and Execute Commands
         uses: appleboy/ssh-action@master
