@@ -34,7 +34,7 @@ jobs:
           script: |
             # Replace the following commands with your desired commands
             echo "Connected to EC2 instance"
-            sudo pg_restore -U postgres -P ${{ secrets.AWS_RDS_PASSWORD }} -d moodle -h localhost -v /test/proddbbackup06102023.sql
-            # Run your PostgreSQL dump command here
+            sudo pg_restore -U postgres -P ${{ secrets.AWS_RDS_PASSWORD }} -d moodle -W -h localhost -v /test/proddbbackup06102023.sql
         env:
           SSH_KEY: ${{ secrets.SSH_PEM_KEY }}
+          PGPASSWORD: ${{ secrets.AWS_RDS_PASSWORD }}
