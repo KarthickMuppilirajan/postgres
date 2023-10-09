@@ -35,6 +35,6 @@ jobs:
             # Replace the following commands with your desired commands
             echo "Connected to EC2 instance"
             # sudo pg_restore -h ${{ secrets.AWS_RDS_HOST }} -U ${{ secrets.AWS_RDS_USER }} -d ${{ secrets.AWS_RDS_DATABASE }} -v /test/moodle07102023.sql
-            pg_restore --clean --create -U  ${{ secrets.AWS_RDS_USER }} -d ${{ secrets.AWS_RDS_DATABASE }} -v /test/moodle07102023.sql
+            pg_restore --clean -U  ${{ secrets.AWS_RDS_USER }} -d ${{ secrets.AWS_RDS_DATABASE }} -v /test/moodle07102023.sql
         env:
           PGPASSWORD: ${{ secrets.AWS_RDS_PASSWORD }}
