@@ -21,7 +21,7 @@ jobs:
 
       - name: Copy File to EC2
         run: |
-          sudo scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no update.sql ubuntu@${{ secrets.EC2_INSTANCE_IP }}:/test
+          sudo scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no proddbbackup06102023.sql ubuntu@${{ secrets.EC2_INSTANCE_IP }}:/test
         # env:
         #   EC2_INSTANCE_IP: ${{ secrets.EC2_INSTANCE_IP }}
 
@@ -34,8 +34,8 @@ jobs:
           script: |
             # Replace the following commands with your desired commands
             echo "Connected to EC2 instance"
-            # sudo pg_restore -h ${{ secrets.AWS_RDS_HOST }} -U ${{ secrets.AWS_RDS_USER }} -d ${{ secrets.AWS_RDS_DATABASE }} -v /test/proddbbackup13102023.sql
-            sudo pg_restore --clean -h ${{ secrets.AWS_RDS_HOST }} -U  ${{ secrets.AWS_RDS_USER }} -d ${{ secrets.AWS_RDS_DATABASE }} -v /test/update.sql
+            # sudo pg_restore -h ${{ secrets.AWS_RDS_HOST }} -U ${{ secrets.AWS_RDS_USER }} -d ${{ secrets.AWS_RDS_DATABASE }} -v /test/proddbbackup06102023.sql
+            sudo pg_restore --clean -h ${{ secrets.AWS_RDS_HOST }} -U  ${{ secrets.AWS_RDS_USER }} -d ${{ secrets.AWS_RDS_DATABASE }} -v /test/proddbbackup06102023.sql
             
         env:
           PGPASSWORD: ${{ secrets.AWS_RDS_PASSWORD }}
